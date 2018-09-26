@@ -1,4 +1,9 @@
 package com.inca.thread.step03;
+/**
+ * 原始写法导致混乱结果，引入线程同步的必要性
+ * @author Administrator
+ *
+ */
 
 public class SynchronizedTest01 {
 
@@ -8,7 +13,7 @@ public class SynchronizedTest01 {
 		new Thread(new Runnable() {
 			public void run() {
 				while (true) {
-					output.output02("shizhanwei");
+					output.output00("shizhanwei");
 				}
 			}
 		}).start();
@@ -16,7 +21,7 @@ public class SynchronizedTest01 {
 		new Thread(new Runnable() {
 			public void run() {
 				while (true) {
-					output.output02("史战伟");
+					output.output00("史战伟");
 				}
 			}
 		}).start();
