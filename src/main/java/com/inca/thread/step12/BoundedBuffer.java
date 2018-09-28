@@ -5,7 +5,8 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * 可阻塞队列的源码实现分析
+ * 多路可阻塞队列的源码实现分析
+ * 
  * 
  * @author Bruce
  *
@@ -55,7 +56,15 @@ class BoundedBuffer {
 	
 	public static void main(String[] args) {
 		try {
-			new BoundedBuffer().put(100);
+			BoundedBuffer boundedBuffer = new BoundedBuffer();
+			boundedBuffer.put(1);
+			boundedBuffer.put(2);
+			boundedBuffer.put(3);
+			boundedBuffer.put(4);
+			System.out.println(boundedBuffer.take());
+			System.out.println(boundedBuffer.take());
+			System.out.println(boundedBuffer.take());
+			System.out.println(boundedBuffer.take());
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
