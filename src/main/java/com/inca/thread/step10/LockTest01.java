@@ -12,7 +12,7 @@ public class LockTest01 {
 		new Thread(new Runnable() {
 			public void run() {
 				while (true) {
-					output.output02("shizhanwei");
+					output.output("shizhanwei");
 				}
 			}
 		}).start();
@@ -20,7 +20,7 @@ public class LockTest01 {
 		new Thread(new Runnable() {
 			public void run() {
 				while (true) {
-					output.output02("史战伟");
+					output.output("史战伟");
 				}
 			}
 		}).start();
@@ -29,8 +29,4 @@ public class LockTest01 {
 
 }
 //打印结果:
-//	shizhanwei
-//	s史战伟
-//	史战伟
-//	史hizhanwei
-//	战伟
+//正常

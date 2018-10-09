@@ -12,7 +12,7 @@ import java.util.concurrent.locks.ReentrantLock;
 public class Outputer {
 	Lock lock = new ReentrantLock();
 
-	public void output02(String name) {
+	public void output(String name) {
 		lock.lock();
 		int len = name.length();
 		for (int i = 0; i < len; i++) {
