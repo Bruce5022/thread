@@ -5,27 +5,18 @@ import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * 更加面向对象的锁Lock引入
+ * 
  * @author Bruce
  *
  */
 public class Outputer {
 	Lock lock = new ReentrantLock();
 
-	/*public synchronized void output01(String name) {
-		int len = name.length();
-		for (int i = 0; i < len; i++) {
-			System.out.print(name.charAt(i));
-		}
-		System.out.println();
-	}*/
-
 	public void output02(String name) {
 		lock.lock();
 		int len = name.length();
-		synchronized (this) {
-			for (int i = 0; i < len; i++) {
-				System.out.print(name.charAt(i));
-			}
+		for (int i = 0; i < len; i++) {
+			System.out.print(name.charAt(i));
 		}
 		System.out.println();
 		lock.unlock();
