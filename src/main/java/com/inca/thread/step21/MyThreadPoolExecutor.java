@@ -50,7 +50,7 @@ public class MyThreadPoolExecutor {
 
     // 2.execute提交任务
     // 注意:这里可以同时被多个线程调用
-    public void execute(Runnable command) {
+    public void execute(Runnable command) throws Exception {
         // 注意:多个线程调用过来,可能出现问题,核心线程数量5个,6个线程同一时间,执行到这行代码,同时判断成立,导致6次调用.
 
         // 废弃方案
@@ -74,10 +74,25 @@ public class MyThreadPoolExecutor {
             }
         }
 
-        // 2.提交到任务仓库
+        // 2.提交到任务仓库,是否达到线程池最大数量?成功放入表示没满,结束
         if (workQueue.offer(command)) {
             return;
         }
+
+        // 3.如果放入失败,已经满了呢?
+        if (currentPoolSize.get() < maximumPoolSize) {
+            // 原子操作,只要调用,就是原子+1,保证都是递增,不覆盖
+            if (currentPoolSize.incrementAndGet() <= maximumPoolSize) {
+                new Worker(command).start();
+                return;
+            } else {
+                // 如果发现 超过了核心线程数量的大小限制
+                currentPoolSize.decrementAndGet();
+            }
+        }
+
+        // 4.拒绝处理这个任务
+        throw new Exception("拒绝执行");
 
     }
 }
